@@ -50,3 +50,7 @@ Python 可以通过 pip 包管理器进行依赖管理。由于环境配置不�
 ## 微信通知
 
 ![通知样式](https://i.loli.net/2020/12/28/ldYM28zmhrgCvoT.jpg)
+
+## 赞赏
+
+![赞赏码](https://i.loli.net/2021/01/12/ykHU2RSXoCZFfxr.jpg)
