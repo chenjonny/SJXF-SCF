@@ -53,4 +53,6 @@ Python 可以通过 pip 包管理器进行依赖管理。由于环境配置不�
 
 ## 赞赏
 
-![赞赏码](https://i.loli.net/2021/01/12/ykHU2RSXoCZFfxr.jpg)
+<div align=center><img width="260" height="260" src="https://i.loli.net/2021/01/12/ykHU2RSXoCZFfxr.jpg"></div>
+
+![](https://i.loli.net/2020/06/17/ZpwDfJmCGEoKqnb.png)
