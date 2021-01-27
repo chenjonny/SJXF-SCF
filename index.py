@@ -10,6 +10,7 @@ from loguru import logger
 
 # --------------------------------------------- #
 # 存放用户名，密码，Server 酱 SCKEY
+# 用户名和密码以列表形式存放，可提供多个账号
 # --------------------------------------------- #
 
 SCKEY = ""
@@ -18,10 +19,6 @@ user_list = [
     {
         "username": os.environ.get('tel1'),
         "password": os.environ.get('pd1')
-    },
-    {
-        "username": os.environ.get('tel2'),
-        "password": os.environ.get('pd2')
     }
 ]
 
@@ -355,7 +352,8 @@ class SJXF(object):
         }
         response = requests.post(url, headers=headers, json=_data).json()
         if response["success"]:
-            logger.info("答题完成，当前排名：{}".format(response["data"]["bestRank"]))
+            pass
+            # logger.info("答题完成，当前排名：{}".format(response["data"]["bestRank"]))
         else:
             logger.error("请求失败，返回数据：{}".format(response))
 
@@ -406,6 +404,7 @@ class SJXF(object):
         """使用 server 酱通知到微信"""
 
         url = "https://sc.ftqq.com/{}.send".format(key)
+        time.sleep(5)
         data = requests.get(url, params={
             "text": self.title, "desp": self.content}).json()
         if data['errno'] == 0:
