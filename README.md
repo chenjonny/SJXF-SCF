@@ -2,6 +2,12 @@
 
 **仅供学习交流使用，严禁用于商业或其他用途，请于24小时内删除！**
 
+## 使用方式
+
+可搭建腾讯云函数，每日定时执行，也可直接使用本地命令运行。
+
+本地运行需要先修改 `username` 和 `password` 字段，对应输入用户名和密码，然后在终端使用 `python3 index.py` 执行。
+
 ## 密码加密部分
 
 加密后的密码受 [RuikaiWang/Study](https://github.com/RuikaiWang/Study) 启发（Copy）。
