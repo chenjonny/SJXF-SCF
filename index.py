@@ -251,7 +251,7 @@ class SJXF(object):
         """点赞/取消点赞；收藏/取消收藏统一请求"""
 
         time.sleep(2)
-        _data = {"userId": int(self.user_id), "uniqueId": article_id, "type": 1}
+        _data = {"userId": int(self.user_id), "uniqueId": article_id, "type": "1"}
         logger.debug(_data)
         response = requests.post(
             url, headers=self.like_collect_headers, json=_data).json()
@@ -326,7 +326,7 @@ class SJXF(object):
         # 看视频
         self.listen()
 
-        for article_id in list(self.article)[:2]:
+        for article_id in list(self.article)[2:4]:
             data = self.search_like_collect(str(article_id))
             self.do_like_collect(str(article_id), data)
             self.article_id = str(article_id)
@@ -393,11 +393,8 @@ class SJXF(object):
             "list": answer_list
         }
         response = requests.post(url, headers=headers, json=_data).json()
-        if response["success"]:
-            pass
-            # logger.info("答题完成，当前排名：{}".format(response["data"]["bestRank"]))
-        else:
-            logger.error("请求失败，返回数据：{}".format(response))
+        if not response["success"]:
+           logger.error("请求失败，返回数据：{}".format(response))
 
     def question_main(self):
         """自学自测主程序"""
