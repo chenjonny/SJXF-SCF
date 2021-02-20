@@ -4,7 +4,7 @@
 
 ## 密码加密部分
 
-加密后的密码受 [RuikaiWang/Study](https://github.com/RuikaiWang/Study) 启发，也可直接抓包获取。
+加密后的密码受 [RuikaiWang/Study](https://github.com/RuikaiWang/Study) 启发（Copy）。
 
 ### 安装 pycrypto
 
