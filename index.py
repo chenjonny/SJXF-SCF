@@ -1,3 +1,14 @@
+"""
+@Author: Jianxun
+@Email: i@lijianxun.top
+@File Name: index.py
+@Description: 三晋先锋自动积分脚本
+
+1. 支持腾讯云函数
+2. 支持本地运行
+3. 直接输入用户名和密码
+
+"""
 import base64
 import json
 import os
@@ -5,14 +16,15 @@ import sys
 import time
 from threading import Thread
 
+from Crypto.Cipher import AES
+
 import requests
 from loguru import logger
-
-from secret import EncryptDate
 
 # --------------------------------------------- #
 # 存放用户名，密码，Server 酱 SCKEY
 # 用户名和密码以列表形式存放，可提供多个账号
+# 支持直接输入用户名和密码
 # --------------------------------------------- #
 
 SCKEY = ""
@@ -23,6 +35,34 @@ user_list = [
         "password": os.environ.get('pd1')
     }
 ]
+
+
+class EncryptDate(object):
+    """
+    参考：https://github.com/RuikaiWang/Study/blob/master/PassWordEncode.py
+    """
+
+    def __init__(self):
+        self.key = "sanjinxianfengya".encode("utf8")  # 初始化密钥
+        self.length = AES.block_size  # 初始化数据块大小
+        self.aes = AES.new(self.key, AES.MODE_ECB)  # 初始化AES,ECB模式的实例
+        self.unpad = lambda date: date[0:-ord(date[-1])]
+
+    def pad(self, text):
+        count = len(text.encode('utf-8'))
+        add = self.length - (count % self.length)
+        entext = text + (chr(add) * add)
+        return entext
+
+    def encrypt(self, encrData):  # 加密函数
+        res = self.aes.encrypt(self.pad(encrData).encode("utf8"))
+        msg = str(base64.b64encode(res), encoding="utf8")
+        return msg
+
+    def decrypt(self, decrData):  # 解密函数
+        res = base64.decodebytes(decrData.encode("utf8"))
+        msg = self.aes.decrypt(res).decode("utf8")
+        return self.unpad(msg)
 
 
 class SJXF(object):
