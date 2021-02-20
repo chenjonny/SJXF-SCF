@@ -8,6 +8,8 @@ from threading import Thread
 import requests
 from loguru import logger
 
+from secret import EncryptDate
+
 # --------------------------------------------- #
 # 存放用户名，密码，Server 酱 SCKEY
 # 用户名和密码以列表形式存放，可提供多个账号
@@ -426,8 +428,9 @@ class SJXF(object):
 
     def main(self, user):
 
+        secret_code = EncryptDate()
         user_info = self.login(username=user["username"],
-                               password=user["password"])
+                               password=secret_code.encrypt(user["password"]))
         logger.info("正在执行账号：{}".format(user_info["username"]))
         self.auth = user_info["auth"]
         self.user_id = user_info["user_id"]

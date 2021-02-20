@@ -6,7 +6,11 @@
 
 加密后的密码受 [RuikaiWang/Study](https://github.com/RuikaiWang/Study) 启发，也可直接抓包获取。
 
-有条件的同学可以运行[这部分代码](https://raw.githubusercontent.com/RuikaiWang/Study/master/PassWordEncode.py)尝试获取加密后的内容。主要是 AES 太难安装了，推荐抓包获取。
+### 安装 pycrypto
+
+1. pip uninstall crypto
+2. pip uninstall pycrypto
+3. pip install pycrypto
 
 ## 环境变量
 
