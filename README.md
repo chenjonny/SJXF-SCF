@@ -8,8 +8,6 @@
 
 本地运行需要先修改 `username` 和 `password` 字段，对应输入用户名和密码，然后在终端使用 `python3 index.py` 执行。
 
-**现已知的问题是每天可保证 13 分，偶尔会 15 分，可能是点赞收藏接口有问题。**
-
 ## 密码加密部分
 
 加密后的密码受 [RuikaiWang/Study](https://github.com/RuikaiWang/Study) 启发（Copy）。
@@ -51,9 +49,9 @@ Python 可以通过 pip 包管理器进行依赖管理。由于环境配置不�
 
 ## Server 酱微信通知
 
-[Server 酱](http://sc.ftqq.com/3.version)使用 GitHub 一键登录，获取 SCKEY。
+[Server 酱](https://sct.ftqq.com/)使用微信登录，获取 SendKey。
 
-![SCKEY](https://i.loli.net/2020/12/28/XuO3eUF4yJ1Dt8P.jpg)
+![SendKey](https://i.loli.net/2020/12/28/XuO3eUF4yJ1Dt8P.jpg)
 
 ## 触发管理
 
@@ -63,7 +61,7 @@ Python 可以通过 pip 包管理器进行依赖管理。由于环境配置不�
 
 ## 微信通知
 
-<div align=center><img src="https://i.loli.net/2021/02/22/5gr1cVsKzIYnmZT.jpg"></div>
+<div align=center><img src="https://i.loli.net/2021/02/22/BbI8DRJ7eldxZNs.jpg"></div>
 
 ## 赞赏
 
