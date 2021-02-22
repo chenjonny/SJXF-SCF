@@ -51,15 +51,16 @@ class EncryptDate(object):
     def pad(self, text):
         count = len(text.encode('utf-8'))
         add = self.length - (count % self.length)
-        entext = text + (chr(add) * add)
-        return entext
+        return text + (chr(add) * add)
 
-    def encrypt(self, encrData):  # 加密函数
+    def encrypt(self, encrData):
+        """加密"""
         res = self.aes.encrypt(self.pad(encrData).encode("utf8"))
         msg = str(base64.b64encode(res), encoding="utf8")
         return msg
 
-    def decrypt(self, decrData):  # 解密函数
+    def decrypt(self, decrData):
+        """解密"""
         res = base64.decodebytes(decrData.encode("utf8"))
         msg = self.aes.decrypt(res).decode("utf8")
         return self.unpad(msg)
@@ -82,10 +83,6 @@ class SJXF(object):
         self.article = dict()
         self.auth_list = list()
 
-        # --------------------------------------------- #
-        # 各接口请求头
-        # --------------------------------------------- #
-
         # 登录接口请求头
         self.login_headers = {
             "Content-Type": "application/json; charset=UTF-8",
@@ -96,11 +93,18 @@ class SJXF(object):
             "User-Agent": "okhttp/3.8.0"
         }
 
+    # --------------------------------------------- #
+    # 各接口请求头
+    # --------------------------------------------- #
+
+    def init_headers(self, auth, user_id):
+        """初始化接口请求头"""
+
         # 试听，阅读接口请求头
         self.normal_headers = {
             "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": self.auth,
-            "sUserId": str(self.user_id),
+            "Authorization": "Bearer " + auth,
+            "sUserId": str(user_id),
             "Host": "221.204.170.88:8184",
             "Connection": "Keep-Alive",
             "Accept-Encoding": "gzip",
@@ -109,8 +113,8 @@ class SJXF(object):
 
         # 点赞，收藏请求头
         self.like_collect_headers = {
-            "Authorization": self.auth,
-            "sUserId": str(self.user_id),
+            "Authorization": "Bearer " + auth,
+            "sUserId": str(user_id),
             "Content-Type": "application/json; charset=utf-8",
             "Content-Length": "48",
             "Host": "221.204.170.88:8184",
@@ -122,8 +126,8 @@ class SJXF(object):
 
         # 答题接口请求头
         self.question_headers = {
-            "Authorization": self.auth,
-            "sUserId": str(self.user_id),
+            "Authorization": "Bearer " + auth,
+            "sUserId": str(user_id),
             "Cache-Control": "no-cache",
             "Connection": "close",
             "Host": "221.204.170.88:8184",
@@ -138,8 +142,8 @@ class SJXF(object):
         self.score_headers = {
             "Accept": "*/*",
             "Accept-Encoding": "gzip, deflate",
-            "Authorization": self.auth,
-            "sUserId": str(self.user_id),
+            "Authorization": "Bearer " + auth,
+            "sUserId": str(user_id),
             "Cache-Control": "no-cache",
             "Connection": "Keep-Alive",
             "Host": "221.204.170.88:8184",
@@ -176,6 +180,8 @@ class SJXF(object):
         logger.info(response["msg"])
         logger.debug("auth: {}".format(auth))
         logger.info("user_id: {}".format(user_id))
+        self.auth, self.user_id = auth, user_id
+        self.init_headers(auth=auth, user_id=user_id)
         return {"auth": auth, "user_id": user_id, "username": username}
 
     # --------------------------------------------- #
@@ -469,8 +475,6 @@ class SJXF(object):
         user_info = self.login(username=user["username"],
                                password=secret_code.encrypt(user["password"]))
         logger.info("正在执行账号：{}".format(user_info["username"]))
-        self.auth = user_info["auth"]
-        self.user_id = user_info["user_id"]
         self.like_collect_main()  # 点赞收藏
         self.question_main()  # 自学自测
         self.score_main(telephone=user_info["username"])  # 积分查询
