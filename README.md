@@ -1,3 +1,5 @@
+![](https://i.loli.net/2020/06/17/ZpwDfJmCGEoKqnb.png)
+
 # **三晋先锋**自动积分脚本
 
 **仅供学习交流使用，严禁用于商业或其他用途，请于24小时内删除！**
@@ -66,5 +68,3 @@ Python 可以通过 pip 包管理器进行依赖管理。由于环境配置不�
 ## 赞赏
 
 <div align=center><img width="260" height="260" src="https://i.loli.net/2021/01/12/ykHU2RSXoCZFfxr.jpg"></div>
-
-![](https://i.loli.net/2020/06/17/ZpwDfJmCGEoKqnb.png)
